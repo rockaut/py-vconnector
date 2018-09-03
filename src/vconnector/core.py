@@ -319,6 +319,8 @@ class VConnector(object):
             properties = {}
             for prop in obj.propSet:
                 properties[prop.name] = prop.val
+                if prop.name == "info.url" and prop.val.startswith("ds://"):
+                    properties["info.instance"] = prop.val.split("/")[-1]
 
             if include_mors:
                 properties['obj'] = obj.obj
